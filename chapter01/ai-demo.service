@@ -1,0 +1,14 @@
+[Unit]
+Description=AI Demo Service (PBL Chapter 01)
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/ai-service-lab
+ExecStart=/usr/bin/python3 /home/ubuntu/ai-service-lab/app.py
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
