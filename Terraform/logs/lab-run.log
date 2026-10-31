@@ -1,0 +1,1043 @@
+===== 2026-10-29T01:42:54+0900 =====
+Terraform v1.17.0
+on darwin_arm64
+
+----- help (first 20) -----
+Usage: terraform [global options] <subcommand> [args]
+
+The available commands for execution are listed below.
+The primary workflow commands are given first, followed by
+less common or more advanced commands.
+
+Main commands:
+  init          Prepare your working directory for other commands
+  validate      Check whether the configuration is valid
+  plan          Show changes required by the current configuration
+  apply         Create or update infrastructure
+  destroy       Destroy previously-created infrastructure
+
+All other commands:
+  console       Try Terraform expressions at an interactive command prompt
+  fmt           Reformat your configuration in the standard style
+  force-unlock  Release a stuck lock on the current workspace
+  get           Install or upgrade remote Terraform modules
+  graph         Generate a Graphviz graph of the steps in an operation
+  import        Associate existing infrastructure with a Terraform resource
+===== credentials (no configure) =====
+
+aws: [ERROR]: An error occurred (NoCredentials): Unable to locate credentials. You can configure credentials by running "aws login".
+sts_exit=253
+===== fmt =====
+===== fundamentals =====
+[0m[1mInitializing the backend...[0m
+
+[0m[1mInitializing provider plugins...[0m
+- Finding hashicorp/local versions matching "~> 2.5"...
+- Installing hashicorp/local v2.9.1...
+- Installed hashicorp/local v2.9.1 (signed by HashiCorp)
+
+Terraform has created a lock file [1m.terraform.lock.hcl[0m to record the provider
+selections it made above. Include this file in your version control repository
+so that Terraform can guarantee to make the same selections by default when
+you run "terraform init" in the future.[0m
+
+[0m[1m[32mTerraform has been successfully initialized![0m[32m[0m
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+----- plan default -----
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+ <= read (data resources)
+
+Terraform will perform the following actions:
+
+  # data.local_file.existing will be read during apply
+  # (depends on a resource or a module with changes pending)
+ <= data "local_file" "existing" {
+      + content              = (known after apply)
+      + content_base64       = (known after apply)
+      + content_base64sha256 = (known after apply)
+      + content_base64sha512 = (known after apply)
+      + content_md5          = (known after apply)
+      + content_sha1         = (known after apply)
+      + content_sha256       = (known after apply)
+      + content_sha512       = (known after apply)
+      + filename             = "./hello.txt"
+      + id                   = (known after apply)
+    }
+
+  # local_file.study will be created
+  + resource "local_file" "study" {
+      + content              = <<-EOT
+            Hello, Terraform!
+        EOT
+      + content_base64sha256 = (known after apply)
+      + content_base64sha512 = (known after apply)
+      + content_md5          = (known after apply)
+      + content_sha1         = (known after apply)
+      + content_sha256       = (known after apply)
+      + content_sha512       = (known after apply)
+      + directory_permission = "0777"
+      + file_permission      = "0777"
+      + filename             = "./hello.txt"
+      + id                   = (known after apply)
+    }
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + existing_file_content = (known after apply)
+  + file_content          = <<-EOT
+        Hello, Terraform!
+    EOT
+  + file_label            = "terraform-study-Terraform"
+  + file_path             = "./hello.txt"
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+ <= read (data resources)
+
+Terraform will perform the following actions:
+
+  # data.local_file.existing will be read during apply
+  # (depends on a resource or a module with changes pending)
+ <= data "local_file" "existing" {
+      + content              = (known after apply)
+      + content_base64       = (known after apply)
+      + content_base64sha256 = (known after apply)
+      + content_base64sha512 = (known after apply)
+      + content_md5          = (known after apply)
+      + content_sha1         = (known after apply)
+      + content_sha256       = (known after apply)
+      + content_sha512       = (known after apply)
+      + filename             = "./hello.txt"
+      + id                   = (known after apply)
+    }
+
+  # local_file.study will be created
+  + resource "local_file" "study" {
+      + content              = <<-EOT
+            Hello, Terraform!
+        EOT
+      + content_base64sha256 = (known after apply)
+      + content_base64sha512 = (known after apply)
+      + content_md5          = (known after apply)
+      + content_sha1         = (known after apply)
+      + content_sha256       = (known after apply)
+      + content_sha512       = (known after apply)
+      + directory_permission = "0777"
+      + file_permission      = "0777"
+      + filename             = "./hello.txt"
+      + id                   = (known after apply)
+    }
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + existing_file_content = (known after apply)
+  + file_content          = <<-EOT
+        Hello, Terraform!
+    EOT
+  + file_label            = "terraform-study-Terraform"
+  + file_path             = "./hello.txt"
+local_file.study: Creating...
+local_file.study: Creation complete after 0s [id=ae9c7cc6581fe6b7a01af3ee5fa123a4afc9bac1]
+data.local_file.existing: Reading...
+data.local_file.existing: Read complete after 0s [id=ae9c7cc6581fe6b7a01af3ee5fa123a4afc9bac1]
+
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+existing_file_content = <<EOT
+Hello, Terraform!
+
+EOT
+file_content = <<EOT
+Hello, Terraform!
+
+EOT
+file_label = "terraform-study-Terraform"
+file_path = "./hello.txt"
+----- hello.txt -----
+Hello, Terraform!
+----- output -----
+existing_file_content = <<EOT
+Hello, Terraform!
+
+EOT
+file_content = <<EOT
+Hello, Terraform!
+
+EOT
+file_label = "terraform-study-Terraform"
+file_path = "./hello.txt"
+----- state list -----
+data.local_file.existing
+local_file.study
+----- state show -----
+# local_file.study:
+resource "local_file" "study" {
+    content              = <<-EOT
+        Hello, Terraform!
+    EOT
+    content_base64sha256 = "6wKS0JLRbqCUNW2dBDS6ihyRntb8v6POQLyDI/NZqBY="
+    content_base64sha512 = "MX78V3WKEUXOuUnAf2zhHGNSK4kET4IefngGjF0EWEtf2f8sSJvu//UH2UkFthAtRB3oxr7HUo3gIf2wwEw6tQ=="
+    content_md5          = "8478c39679b7757c7b0e23933667b124"
+    content_sha1         = "ae9c7cc6581fe6b7a01af3ee5fa123a4afc9bac1"
+    content_sha256       = "eb0292d092d16ea094356d9d0434ba8a1c919ed6fcbfa3ce40bc8323f359a816"
+    content_sha512       = "317efc57758a1145ceb949c07f6ce11c63522b89044f821e7e78068c5d04584b5fd9ff2c489beefff507d94905b6102d441de8c6bec7528de021fdb0c04c3ab5"
+    directory_permission = "0777"
+    file_permission      = "0777"
+    filename             = "./hello.txt"
+    id                   = "ae9c7cc6581fe6b7a01af3ee5fa123a4afc9bac1"
+}
+----- plan -var Docker -----
+local_file.study: Refreshing state... [id=ae9c7cc6581fe6b7a01af3ee5fa123a4afc9bac1]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+-/+ destroy and then create replacement
+ <= read (data resources)
+
+Terraform will perform the following actions:
+
+  # data.local_file.existing will be read during apply
+  # (depends on a resource or a module with changes pending)
+ <= data "local_file" "existing" {
+      + content              = (known after apply)
+      + content_base64       = (known after apply)
+      + content_base64sha256 = (known after apply)
+      + content_base64sha512 = (known after apply)
+      + content_md5          = (known after apply)
+      + content_sha1         = (known after apply)
+      + content_sha256       = (known after apply)
+      + content_sha512       = (known after apply)
+      + filename             = "./hello.txt"
+      + id                   = (known after apply)
+    }
+
+  # local_file.study must be replaced
+-/+ resource "local_file" "study" {
+      ~ content              = <<-EOT # forces replacement
+          - Hello, Terraform!
+          + Hello, Docker!
+        EOT
+      ~ content_base64sha256 = "6wKS0JLRbqCUNW2dBDS6ihyRntb8v6POQLyDI/NZqBY=" -> (known after apply)
+      ~ content_base64sha512 = "MX78V3WKEUXOuUnAf2zhHGNSK4kET4IefngGjF0EWEtf2f8sSJvu//UH2UkFthAtRB3oxr7HUo3gIf2wwEw6tQ==" -> (known after apply)
+      ~ content_md5          = "8478c39679b7757c7b0e23933667b124" -> (known after apply)
+      ~ content_sha1         = "ae9c7cc6581fe6b7a01af3ee5fa123a4afc9bac1" -> (known after apply)
+      ~ content_sha256       = "eb0292d092d16ea094356d9d0434ba8a1c919ed6fcbfa3ce40bc8323f359a816" -> (known after apply)
+      ~ content_sha512       = "317efc57758a1145ceb949c07f6ce11c63522b89044f821e7e78068c5d04584b5fd9ff2c489beefff507d94905b6102d441de8c6bec7528de021fdb0c04c3ab5" -> (known after apply)
+      ~ id                   = "ae9c7cc6581fe6b7a01af3ee5fa123a4afc9bac1" -> (known after apply)
+        # (3 unchanged attributes hidden)
+    }
+
+Plan: 1 to add, 0 to change, 1 to destroy.
+
+Changes to Outputs:
+  ~ existing_file_content = <<-EOT
+        Hello, Terraform!
+    EOT -> (known after apply)
+  ~ file_content          = <<-EOT
+      - Hello, Terraform!
+      + Hello, Docker!
+    EOT
+  ~ file_label            = "terraform-study-Terraform" -> "terraform-study-Docker"
+----- plan TF_VAR AWS -----
+local_file.study: Refreshing state... [id=ae9c7cc6581fe6b7a01af3ee5fa123a4afc9bac1]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+-/+ destroy and then create replacement
+ <= read (data resources)
+
+Terraform will perform the following actions:
+
+  # data.local_file.existing will be read during apply
+  # (depends on a resource or a module with changes pending)
+ <= data "local_file" "existing" {
+      + content              = (known after apply)
+      + content_base64       = (known after apply)
+      + content_base64sha256 = (known after apply)
+      + content_base64sha512 = (known after apply)
+      + content_md5          = (known after apply)
+      + content_sha1         = (known after apply)
+      + content_sha256       = (known after apply)
+      + content_sha512       = (known after apply)
+      + filename             = "./hello.txt"
+      + id                   = (known after apply)
+    }
+
+  # local_file.study must be replaced
+-/+ resource "local_file" "study" {
+      ~ content              = <<-EOT # forces replacement
+          - Hello, Terraform!
+          + Hello, AWS!
+        EOT
+      ~ content_base64sha256 = "6wKS0JLRbqCUNW2dBDS6ihyRntb8v6POQLyDI/NZqBY=" -> (known after apply)
+      ~ content_base64sha512 = "MX78V3WKEUXOuUnAf2zhHGNSK4kET4IefngGjF0EWEtf2f8sSJvu//UH2UkFthAtRB3oxr7HUo3gIf2wwEw6tQ==" -> (known after apply)
+      ~ content_md5          = "8478c39679b7757c7b0e23933667b124" -> (known after apply)
+      ~ content_sha1         = "ae9c7cc6581fe6b7a01af3ee5fa123a4afc9bac1" -> (known after apply)
+      ~ content_sha256       = "eb0292d092d16ea094356d9d0434ba8a1c919ed6fcbfa3ce40bc8323f359a816" -> (known after apply)
+      ~ content_sha512       = "317efc57758a1145ceb949c07f6ce11c63522b89044f821e7e78068c5d04584b5fd9ff2c489beefff507d94905b6102d441de8c6bec7528de021fdb0c04c3ab5" -> (known after apply)
+      ~ id                   = "ae9c7cc6581fe6b7a01af3ee5fa123a4afc9bac1" -> (known after apply)
+        # (3 unchanged attributes hidden)
+    }
+
+Plan: 1 to add, 0 to change, 1 to destroy.
+
+Changes to Outputs:
+  ~ existing_file_content = <<-EOT
+        Hello, Terraform!
+    EOT -> (known after apply)
+  ~ file_content          = <<-EOT
+      - Hello, Terraform!
+      + Hello, AWS!
+    EOT
+  ~ file_label            = "terraform-study-Terraform" -> "terraform-study-AWS"
+----- plan env AWS overridden by -var Docker -----
+local_file.study: Refreshing state... [id=ae9c7cc6581fe6b7a01af3ee5fa123a4afc9bac1]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+-/+ destroy and then create replacement
+ <= read (data resources)
+
+Terraform will perform the following actions:
+
+  # data.local_file.existing will be read during apply
+  # (depends on a resource or a module with changes pending)
+ <= data "local_file" "existing" {
+      + content              = (known after apply)
+      + content_base64       = (known after apply)
+      + content_base64sha256 = (known after apply)
+      + content_base64sha512 = (known after apply)
+      + content_md5          = (known after apply)
+      + content_sha1         = (known after apply)
+      + content_sha256       = (known after apply)
+      + content_sha512       = (known after apply)
+      + filename             = "./hello.txt"
+      + id                   = (known after apply)
+    }
+
+  # local_file.study must be replaced
+-/+ resource "local_file" "study" {
+      ~ content              = <<-EOT # forces replacement
+          - Hello, Terraform!
+          + Hello, Docker!
+        EOT
+      ~ content_base64sha256 = "6wKS0JLRbqCUNW2dBDS6ihyRntb8v6POQLyDI/NZqBY=" -> (known after apply)
+      ~ content_base64sha512 = "MX78V3WKEUXOuUnAf2zhHGNSK4kET4IefngGjF0EWEtf2f8sSJvu//UH2UkFthAtRB3oxr7HUo3gIf2wwEw6tQ==" -> (known after apply)
+      ~ content_md5          = "8478c39679b7757c7b0e23933667b124" -> (known after apply)
+      ~ content_sha1         = "ae9c7cc6581fe6b7a01af3ee5fa123a4afc9bac1" -> (known after apply)
+      ~ content_sha256       = "eb0292d092d16ea094356d9d0434ba8a1c919ed6fcbfa3ce40bc8323f359a816" -> (known after apply)
+      ~ content_sha512       = "317efc57758a1145ceb949c07f6ce11c63522b89044f821e7e78068c5d04584b5fd9ff2c489beefff507d94905b6102d441de8c6bec7528de021fdb0c04c3ab5" -> (known after apply)
+      ~ id                   = "ae9c7cc6581fe6b7a01af3ee5fa123a4afc9bac1" -> (known after apply)
+        # (3 unchanged attributes hidden)
+    }
+
+Plan: 1 to add, 0 to change, 1 to destroy.
+
+Changes to Outputs:
+  ~ existing_file_content = <<-EOT
+        Hello, Terraform!
+    EOT -> (known after apply)
+  ~ file_content          = <<-EOT
+      - Hello, Terraform!
+      + Hello, Docker!
+    EOT
+  ~ file_label            = "terraform-study-Terraform" -> "terraform-study-Docker"
+----- output -json -----
+{
+  "existing_file_content": {
+    "sensitive": false,
+    "type": "string",
+    "value": "Hello, Terraform!\n"
+  },
+  "file_content": {
+    "sensitive": false,
+    "type": "string",
+    "value": "Hello, Terraform!\n"
+  },
+  "file_label": {
+    "sensitive": false,
+    "type": "string",
+    "value": "terraform-study-Terraform"
+  },
+  "file_path": {
+    "sensitive": false,
+    "type": "string",
+    "value": "./hello.txt"
+  }
+}
+----- saved plan Linux -----
+local_file.study: Refreshing state... [id=ae9c7cc6581fe6b7a01af3ee5fa123a4afc9bac1]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+-/+ destroy and then create replacement
+ <= read (data resources)
+
+Terraform will perform the following actions:
+
+  # data.local_file.existing will be read during apply
+  # (depends on a resource or a module with changes pending)
+ <= data "local_file" "existing" {
+      + content              = (known after apply)
+      + content_base64       = (known after apply)
+      + content_base64sha256 = (known after apply)
+      + content_base64sha512 = (known after apply)
+      + content_md5          = (known after apply)
+      + content_sha1         = (known after apply)
+      + content_sha256       = (known after apply)
+      + content_sha512       = (known after apply)
+      + filename             = "./hello.txt"
+      + id                   = (known after apply)
+    }
+
+  # local_file.study must be replaced
+-/+ resource "local_file" "study" {
+      ~ content              = <<-EOT # forces replacement
+          - Hello, Terraform!
+          + Hello, Linux!
+        EOT
+      ~ content_base64sha256 = "6wKS0JLRbqCUNW2dBDS6ihyRntb8v6POQLyDI/NZqBY=" -> (known after apply)
+      ~ content_base64sha512 = "MX78V3WKEUXOuUnAf2zhHGNSK4kET4IefngGjF0EWEtf2f8sSJvu//UH2UkFthAtRB3oxr7HUo3gIf2wwEw6tQ==" -> (known after apply)
+      ~ content_md5          = "8478c39679b7757c7b0e23933667b124" -> (known after apply)
+      ~ content_sha1         = "ae9c7cc6581fe6b7a01af3ee5fa123a4afc9bac1" -> (known after apply)
+      ~ content_sha256       = "eb0292d092d16ea094356d9d0434ba8a1c919ed6fcbfa3ce40bc8323f359a816" -> (known after apply)
+      ~ content_sha512       = "317efc57758a1145ceb949c07f6ce11c63522b89044f821e7e78068c5d04584b5fd9ff2c489beefff507d94905b6102d441de8c6bec7528de021fdb0c04c3ab5" -> (known after apply)
+      ~ id                   = "ae9c7cc6581fe6b7a01af3ee5fa123a4afc9bac1" -> (known after apply)
+        # (3 unchanged attributes hidden)
+    }
+
+Plan: 1 to add, 0 to change, 1 to destroy.
+
+Changes to Outputs:
+  ~ existing_file_content = <<-EOT
+        Hello, Terraform!
+    EOT -> (known after apply)
+  ~ file_content          = <<-EOT
+      - Hello, Terraform!
+      + Hello, Linux!
+    EOT
+  ~ file_label            = "terraform-study-Terraform" -> "terraform-study-Linux"
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+-/+ destroy and then create replacement
+ <= read (data resources)
+
+Terraform will perform the following actions:
+
+  # data.local_file.existing will be read during apply
+  # (depends on a resource or a module with changes pending)
+ <= data "local_file" "existing" {
+      + content              = (known after apply)
+      + content_base64       = (known after apply)
+      + content_base64sha256 = (known after apply)
+      + content_base64sha512 = (known after apply)
+      + content_md5          = (known after apply)
+      + content_sha1         = (known after apply)
+      + content_sha256       = (known after apply)
+      + content_sha512       = (known after apply)
+      + filename             = "./hello.txt"
+      + id                   = (known after apply)
+    }
+
+  # local_file.study must be replaced
+-/+ resource "local_file" "study" {
+      ~ content              = <<-EOT # forces replacement
+          - Hello, Terraform!
+          + Hello, Linux!
+        EOT
+      ~ content_base64sha256 = "6wKS0JLRbqCUNW2dBDS6ihyRntb8v6POQLyDI/NZqBY=" -> (known after apply)
+      ~ content_base64sha512 = "MX78V3WKEUXOuUnAf2zhHGNSK4kET4IefngGjF0EWEtf2f8sSJvu//UH2UkFthAtRB3oxr7HUo3gIf2wwEw6tQ==" -> (known after apply)
+      ~ content_md5          = "8478c39679b7757c7b0e23933667b124" -> (known after apply)
+      ~ content_sha1         = "ae9c7cc6581fe6b7a01af3ee5fa123a4afc9bac1" -> (known after apply)
+      ~ content_sha256       = "eb0292d092d16ea094356d9d0434ba8a1c919ed6fcbfa3ce40bc8323f359a816" -> (known after apply)
+      ~ content_sha512       = "317efc57758a1145ceb949c07f6ce11c63522b89044f821e7e78068c5d04584b5fd9ff2c489beefff507d94905b6102d441de8c6bec7528de021fdb0c04c3ab5" -> (known after apply)
+      ~ id                   = "ae9c7cc6581fe6b7a01af3ee5fa123a4afc9bac1" -> (known after apply)
+        # (3 unchanged attributes hidden)
+    }
+
+Plan: 1 to add, 0 to change, 1 to destroy.
+
+Changes to Outputs:
+  ~ existing_file_content = <<-EOT
+        Hello, Terraform!
+    EOT -> (known after apply)
+  ~ file_content          = <<-EOT
+      - Hello, Terraform!
+      + Hello, Linux!
+    EOT
+  ~ file_label            = "terraform-study-Terraform" -> "terraform-study-Linux"
+local_file.study: Destroying... [id=ae9c7cc6581fe6b7a01af3ee5fa123a4afc9bac1]
+local_file.study: Destruction complete after 0s
+local_file.study: Creating...
+local_file.study: Creation complete after 0s [id=be3183d1cf53c3ce86f4a2606d4d773a88b9e872]
+data.local_file.existing: Reading...
+data.local_file.existing: Read complete after 0s [id=be3183d1cf53c3ce86f4a2606d4d773a88b9e872]
+
+Apply complete! Resources: 1 added, 0 changed, 1 destroyed.
+
+Outputs:
+
+existing_file_content = <<EOT
+Hello, Linux!
+
+EOT
+file_content = <<EOT
+Hello, Linux!
+
+EOT
+file_label = "terraform-study-Linux"
+file_path = "./hello.txt"
+----- hello after Linux plan -----
+Hello, Linux!
+----- graph (local_file edges) -----
+  "data.local_file.existing" [label="data.local_file.existing"];
+  "local_file.study" [label="local_file.study"];
+  "data.local_file.existing" -> "local_file.study";
+===== drift on fundamentals =====
+before: Hello, Terraform!
+drifted: Manual modification
+local_file.study: Refreshing state... [id=ae9c7cc6581fe6b7a01af3ee5fa123a4afc9bac1]
+
+Note: Objects have changed outside of Terraform
+
+Terraform detected the following changes made outside of Terraform since the
+last "terraform apply" which may have affected this plan:
+
+  # local_file.study has been deleted
+  - resource "local_file" "study" {
+      - filename             = "./hello.txt" -> null
+        id                   = "ae9c7cc6581fe6b7a01af3ee5fa123a4afc9bac1"
+        # (9 unchanged attributes hidden)
+    }
+
+
+Unless you have made equivalent changes to your configuration, or ignored the
+relevant attributes using ignore_changes, the following plan may include
+actions to undo or respond to these changes.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+ <= read (data resources)
+
+Terraform will perform the following actions:
+
+  # data.local_file.existing will be read during apply
+  # (depends on a resource or a module with changes pending)
+ <= data "local_file" "existing" {
+      + content              = (known after apply)
+      + content_base64       = (known after apply)
+      + content_base64sha256 = (known after apply)
+      + content_base64sha512 = (known after apply)
+      + content_md5          = (known after apply)
+      + content_sha1         = (known after apply)
+      + content_sha256       = (known after apply)
+      + content_sha512       = (known after apply)
+      + filename             = "./hello.txt"
+      + id                   = (known after apply)
+    }
+
+  # local_file.study will be created
+  + resource "local_file" "study" {
+      + content              = <<-EOT
+            Hello, Terraform!
+        EOT
+      + content_base64sha256 = (known after apply)
+      + content_base64sha512 = (known after apply)
+      + content_md5          = (known after apply)
+      + content_sha1         = (known after apply)
+      + content_sha256       = (known after apply)
+      + content_sha512       = (known after apply)
+      + directory_permission = "0777"
+      + file_permission      = "0777"
+      + filename             = "./hello.txt"
+      + id                   = (known after apply)
+    }
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  ~ existing_file_content = <<-EOT
+        Hello, Terraform!
+    EOT -> (known after apply)
+local_file.study: Refreshing state... [id=ae9c7cc6581fe6b7a01af3ee5fa123a4afc9bac1]
+
+Note: Objects have changed outside of Terraform
+
+Terraform detected the following changes made outside of Terraform since the
+last "terraform apply" which may have affected this plan:
+
+  # local_file.study has been deleted
+  - resource "local_file" "study" {
+      - filename             = "./hello.txt" -> null
+        id                   = "ae9c7cc6581fe6b7a01af3ee5fa123a4afc9bac1"
+        # (9 unchanged attributes hidden)
+    }
+
+
+Unless you have made equivalent changes to your configuration, or ignored the
+relevant attributes using ignore_changes, the following plan may include
+actions to undo or respond to these changes.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+ <= read (data resources)
+
+Terraform will perform the following actions:
+
+  # data.local_file.existing will be read during apply
+  # (depends on a resource or a module with changes pending)
+ <= data "local_file" "existing" {
+      + content              = (known after apply)
+      + content_base64       = (known after apply)
+      + content_base64sha256 = (known after apply)
+      + content_base64sha512 = (known after apply)
+      + content_md5          = (known after apply)
+      + content_sha1         = (known after apply)
+      + content_sha256       = (known after apply)
+      + content_sha512       = (known after apply)
+      + filename             = "./hello.txt"
+      + id                   = (known after apply)
+    }
+
+  # local_file.study will be created
+  + resource "local_file" "study" {
+      + content              = <<-EOT
+            Hello, Terraform!
+        EOT
+      + content_base64sha256 = (known after apply)
+      + content_base64sha512 = (known after apply)
+      + content_md5          = (known after apply)
+      + content_sha1         = (known after apply)
+      + content_sha256       = (known after apply)
+      + content_sha512       = (known after apply)
+      + directory_permission = "0777"
+      + file_permission      = "0777"
+      + filename             = "./hello.txt"
+      + id                   = (known after apply)
+    }
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  ~ existing_file_content = <<-EOT
+        Hello, Terraform!
+    EOT -> (known after apply)
+local_file.study: Creating...
+local_file.study: Creation complete after 0s [id=ae9c7cc6581fe6b7a01af3ee5fa123a4afc9bac1]
+data.local_file.existing: Reading...
+data.local_file.existing: Read complete after 0s [id=ae9c7cc6581fe6b7a01af3ee5fa123a4afc9bac1]
+
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+existing_file_content = <<EOT
+Hello, Terraform!
+
+EOT
+file_content = <<EOT
+Hello, Terraform!
+
+EOT
+file_label = "terraform-study-Terraform"
+file_path = "./hello.txt"
+repaired: Hello, Terraform!
+FAIL: fundamentals drift repaired (Hello, Terraform!)
+===== module =====
+[0m[1mInitializing the backend...[0m
+
+[0m[1mInitializing modules...[0m
+- api in modules/app-config
+
+[0m[1mInitializing provider plugins...[0m
+
+[0m[1m[32mTerraform has been successfully initialized![0m[32m[0m
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+
+Changes to Outputs:
+  + api_config = {
+      + name = "study-api"
+      + port = 8080
+    }
+
+You can apply this plan to save these new output values to the Terraform
+state, without changing any real infrastructure.
+
+Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+api_config = {
+  "name" = "study-api"
+  "port" = 8080
+}
+api_config = {
+  "name" = "study-api"
+  "port" = 8080
+}
+===== lifecycle =====
+[0m[1mInitializing the backend...[0m
+
+[0m[1mInitializing provider plugins...[0m
+- Finding hashicorp/local versions matching "~> 2.5"...
+- Installing hashicorp/local v2.9.1...
+- Installed hashicorp/local v2.9.1 (signed by HashiCorp)
+
+Terraform has created a lock file [1m.terraform.lock.hcl[0m to record the provider
+selections it made above. Include this file in your version control repository
+so that Terraform can guarantee to make the same selections by default when
+you run "terraform init" in the future.[0m
+
+[0m[1m[32mTerraform has been successfully initialized![0m[32m[0m
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # local_file.kept will be created
+  + resource "local_file" "kept" {
+      + content              = <<-EOT
+            keep
+        EOT
+      + content_base64sha256 = (known after apply)
+      + content_base64sha512 = (known after apply)
+      + content_md5          = (known after apply)
+      + content_sha1         = (known after apply)
+      + content_sha256       = (known after apply)
+      + content_sha512       = (known after apply)
+      + directory_permission = "0777"
+      + file_permission      = "0777"
+      + filename             = "./kept.txt"
+      + id                   = (known after apply)
+    }
+
+  # local_file.quiet will be created
+  + resource "local_file" "quiet" {
+      + content              = <<-EOT
+            one
+        EOT
+      + content_base64sha256 = (known after apply)
+      + content_base64sha512 = (known after apply)
+      + content_md5          = (known after apply)
+      + content_sha1         = (known after apply)
+      + content_sha256       = (known after apply)
+      + content_sha512       = (known after apply)
+      + directory_permission = "0777"
+      + file_permission      = "0777"
+      + filename             = "./quiet.txt"
+      + id                   = (known after apply)
+    }
+
+Plan: 2 to add, 0 to change, 0 to destroy.
+local_file.quiet: Creating...
+local_file.kept: Creating...
+local_file.kept: Creation complete after 0s [id=0c251ef2fca485fd117c165c8a20692c0f1c7220]
+local_file.quiet: Creation complete after 0s [id=c7059bb19433cc3cabaa6236c83d56668a843dd2]
+
+Apply complete! Resources: 2 added, 0 changed, 0 destroyed.
+local_file.quiet: Refreshing state... [id=c7059bb19433cc3cabaa6236c83d56668a843dd2]
+local_file.kept: Refreshing state... [id=0c251ef2fca485fd117c165c8a20692c0f1c7220]
+
+No changes. Your infrastructure matches the configuration.
+
+Terraform has compared your real infrastructure against your configuration
+and found no differences, so no changes are needed.
+ignore_changes_plan_exit=0
+local_file.kept: Refreshing state... [id=0c251ef2fca485fd117c165c8a20692c0f1c7220]
+local_file.quiet: Refreshing state... [id=c7059bb19433cc3cabaa6236c83d56668a843dd2]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  - destroy
+
+Terraform planned the following actions, but then encountered a problem:
+
+  # local_file.kept will be destroyed
+  - resource "local_file" "kept" {
+      - content              = <<-EOT
+            keep
+        EOT -> null
+      - content_base64sha256 = "9mCnmW3qz7x1YOQkAFSorYLrAv4lqVBkJX4HCEvKy4U=" -> null
+      - content_base64sha512 = "hMxITNsmjpC6aPKYr17ajQuxjokl5In8Oji37HuMi7n0kMh5VPFMw5c2KV0OD0xvKX8kDJoE4gOjga8U9cbA8A==" -> null
+      - content_md5          = "b260098afc93a054427d63c4de6be6a1" -> null
+      - content_sha1         = "0c251ef2fca485fd117c165c8a20692c0f1c7220" -> null
+      - content_sha256       = "f660a7996deacfbc7560e4240054a8ad82eb02fe25a95064257e07084bcacb85" -> null
+      - content_sha512       = "84cc484cdb268e90ba68f298af5eda8d0bb18e8925e489fc3a38b7ec7b8c8bb9f490c87954f14cc39736295d0e0f4c6f297f240c9a04e203a381af14f5c6c0f0" -> null
+      - directory_permission = "0777" -> null
+      - file_permission      = "0777" -> null
+      - filename             = "./kept.txt" -> null
+      - id                   = "0c251ef2fca485fd117c165c8a20692c0f1c7220" -> null
+    }
+
+  # local_file.quiet will be destroyed
+  - resource "local_file" "quiet" {
+      - content              = <<-EOT
+            one
+        EOT -> null
+      - content_base64sha256 = "LIsI2lzmA5jh8Zrw5dzMdE3ydLgmq+WF6rpoxSVDSAY=" -> null
+      - content_base64sha512 = "B+QcyxZtIaUyfVoq4btIGSuEcOE1cmbJ0RnClMselZeFaUcsneZPttk8vU3QrtC/HnxH/Rkg3hewOKCKhetPoQ==" -> null
+      - content_md5          = "5bbf5a52328e7439ae6e719dfe712200" -> null
+      - content_sha1         = "c7059bb19433cc3cabaa6236c83d56668a843dd2" -> null
+      - content_sha256       = "2c8b08da5ce60398e1f19af0e5dccc744df274b826abe585eaba68c525434806" -> null
+      - content_sha512       = "07e41ccb166d21a5327d5a2ae1bb48192b8470e1357266c9d119c294cb1e95978569472c9de64fb6d93cbd4dd0aed0bf1e7c47fd1920de17b038a08a85eb4fa1" -> null
+      - directory_permission = "0777" -> null
+      - file_permission      = "0777" -> null
+      - filename             = "./quiet.txt" -> null
+      - id                   = "c7059bb19433cc3cabaa6236c83d56668a843dd2" -> null
+    }
+
+Plan: 0 to add, 0 to change, 2 to destroy.
+
+Error: Instance cannot be destroyed
+
+  on main.tf line 10:
+  10: resource "local_file" "kept" {
+
+Resource local_file.kept has lifecycle.prevent_destroy set, but the plan
+calls for this resource to be destroyed. To avoid this error and continue
+with the plan, either disable lifecycle.prevent_destroy or reduce the scope
+of the plan using the -target option.
+prevent_destroy_plan_exit=1
+local_file.quiet: Refreshing state... [id=c7059bb19433cc3cabaa6236c83d56668a843dd2]
+local_file.kept: Refreshing state... [id=0c251ef2fca485fd117c165c8a20692c0f1c7220]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # local_file.kept will be destroyed
+  - resource "local_file" "kept" {
+      - content              = <<-EOT
+            keep
+        EOT -> null
+      - content_base64sha256 = "9mCnmW3qz7x1YOQkAFSorYLrAv4lqVBkJX4HCEvKy4U=" -> null
+      - content_base64sha512 = "hMxITNsmjpC6aPKYr17ajQuxjokl5In8Oji37HuMi7n0kMh5VPFMw5c2KV0OD0xvKX8kDJoE4gOjga8U9cbA8A==" -> null
+      - content_md5          = "b260098afc93a054427d63c4de6be6a1" -> null
+      - content_sha1         = "0c251ef2fca485fd117c165c8a20692c0f1c7220" -> null
+      - content_sha256       = "f660a7996deacfbc7560e4240054a8ad82eb02fe25a95064257e07084bcacb85" -> null
+      - content_sha512       = "84cc484cdb268e90ba68f298af5eda8d0bb18e8925e489fc3a38b7ec7b8c8bb9f490c87954f14cc39736295d0e0f4c6f297f240c9a04e203a381af14f5c6c0f0" -> null
+      - directory_permission = "0777" -> null
+      - file_permission      = "0777" -> null
+      - filename             = "./kept.txt" -> null
+      - id                   = "0c251ef2fca485fd117c165c8a20692c0f1c7220" -> null
+    }
+
+  # local_file.quiet will be destroyed
+  - resource "local_file" "quiet" {
+      - content              = <<-EOT
+            one
+        EOT -> null
+      - content_base64sha256 = "LIsI2lzmA5jh8Zrw5dzMdE3ydLgmq+WF6rpoxSVDSAY=" -> null
+      - content_base64sha512 = "B+QcyxZtIaUyfVoq4btIGSuEcOE1cmbJ0RnClMselZeFaUcsneZPttk8vU3QrtC/HnxH/Rkg3hewOKCKhetPoQ==" -> null
+      - content_md5          = "5bbf5a52328e7439ae6e719dfe712200" -> null
+      - content_sha1         = "c7059bb19433cc3cabaa6236c83d56668a843dd2" -> null
+      - content_sha256       = "2c8b08da5ce60398e1f19af0e5dccc744df274b826abe585eaba68c525434806" -> null
+      - content_sha512       = "07e41ccb166d21a5327d5a2ae1bb48192b8470e1357266c9d119c294cb1e95978569472c9de64fb6d93cbd4dd0aed0bf1e7c47fd1920de17b038a08a85eb4fa1" -> null
+      - directory_permission = "0777" -> null
+      - file_permission      = "0777" -> null
+      - filename             = "./quiet.txt" -> null
+      - id                   = "c7059bb19433cc3cabaa6236c83d56668a843dd2" -> null
+    }
+
+Plan: 0 to add, 0 to change, 2 to destroy.
+local_file.kept: Destroying... [id=0c251ef2fca485fd117c165c8a20692c0f1c7220]
+local_file.quiet: Destroying... [id=c7059bb19433cc3cabaa6236c83d56668a843dd2]
+local_file.quiet: Destruction complete after 0s
+local_file.kept: Destruction complete after 0s
+
+Destroy complete! Resources: 2 destroyed.
+PASS: ignore_changes hid content edit
+PASS: prevent_destroy blocked destroy plan
+===== PoC 1 =====
+[0m[1mInitializing the backend...[0m
+
+[0m[1mInitializing provider plugins...[0m
+- Finding hashicorp/local versions matching "~> 2.5"...
+- Installing hashicorp/local v2.9.1...
+- Installed hashicorp/local v2.9.1 (signed by HashiCorp)
+
+Terraform has created a lock file [1m.terraform.lock.hcl[0m to record the provider
+selections it made above. Include this file in your version control repository
+so that Terraform can guarantee to make the same selections by default when
+you run "terraform init" in the future.[0m
+
+[0m[1m[32mTerraform has been successfully initialized![0m[32m[0m
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+[1] Apply desired state
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  [32m+[0m create[0m
+
+Terraform will perform the following actions:
+
+[1m  # local_file.config[0m will be created
+[0m  [32m+[0m[0m resource "local_file" "config" {
+      [32m+[0m[0m content              = <<-EOT
+            environment=dev
+        EOT
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
+      [32m+[0m[0m directory_permission = "0777"
+      [32m+[0m[0m file_permission      = "0777"
+      [32m+[0m[0m filename             = "./config.txt"
+      [32m+[0m[0m id                   = (known after apply)
+    }
+
+[1mPlan:[0m [0m1 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  [32m+[0m[0m config_path = "./config.txt"
+[0m[1mlocal_file.config: Creating...[0m[0m
+[0m[1mlocal_file.config: Creation complete after 1s [id=1685b7a32904c8d97e4170def7199024e268bfb3][0m
+[0m[1m[32m
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.[0m
+[0m[1m[32m
+Outputs:
+
+[0mconfig_path = "./config.txt"
+[2] Inject drift
+[3] Detect drift
+[0m[1mlocal_file.config: Refreshing state... [id=1685b7a32904c8d97e4170def7199024e268bfb3][0m
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  [32m+[0m create[0m
+
+Terraform will perform the following actions:
+
+[1m  # local_file.config[0m will be created
+[0m  [32m+[0m[0m resource "local_file" "config" {
+      [32m+[0m[0m content              = <<-EOT
+            environment=dev
+        EOT
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
+      [32m+[0m[0m directory_permission = "0777"
+      [32m+[0m[0m file_permission      = "0777"
+      [32m+[0m[0m filename             = "./config.txt"
+      [32m+[0m[0m id                   = (known after apply)
+    }
+
+[1mPlan:[0m [0m1 to add, 0 to change, 0 to destroy.
+true
+[4] Restore desired state
+[0m[1mlocal_file.config: Creating...[0m[0m
+[0m[1mlocal_file.config: Creation complete after 0s [id=1685b7a32904c8d97e4170def7199024e268bfb3][0m
+[0m[1m[32m
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.[0m
+[0m[1m[32m
+Outputs:
+
+[0mconfig_path = "./config.txt"
+PASS: drift detected and repaired
+PASS: PoC1
+===== PoC 2 =====
+[0m[1mInitializing the backend...[0m
+
+[0m[1mInitializing modules...[0m
+- reader in modules/file-reader
+
+[0m[1mInitializing provider plugins...[0m
+- Finding hashicorp/local versions matching "~> 2.5"...
+- Installing hashicorp/local v2.9.1...
+- Installed hashicorp/local v2.9.1 (signed by HashiCorp)
+
+Terraform has created a lock file [1m.terraform.lock.hcl[0m to record the provider
+selections it made above. Include this file in your version control repository
+so that Terraform can guarantee to make the same selections by default when
+you run "terraform init" in the future.[0m
+
+[0m[1m[32mTerraform has been successfully initialized![0m[32m[0m
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+[1] Import existing file
+[0m[1mlocal_file.existing: Importing from ID "/Users/jeong-yelim/linux-lab/Terraform/poc2-import/existing.txt"...[0m
+[31m[31m╷[0m[0m
+[31m│[0m [0m[1m[31mError: [0m[0m[1mResource Import Not Implemented[0m
+[31m│[0m [0m
+[31m│[0m [0m[0mThis resource does not support import. Please contact the provider
+[31m│[0m [0mdeveloper for additional information.
+[31m╵[0m[0m
+[0m[0m
+FAIL: PoC2
+===== PoC 3 static only =====
+[1] Format
+[2] Initialize provider
+[0m[1mInitializing provider plugins...[0m
+- Finding hashicorp/aws versions matching "~> 6.0"...
+- Installing hashicorp/aws v6.70.0...
+- Installed hashicorp/aws v6.70.0 (signed by HashiCorp)
+
+Terraform has created a lock file [1m.terraform.lock.hcl[0m to record the provider
+selections it made above. Include this file in your version control repository
+so that Terraform can guarantee to make the same selections by default when
+you run "terraform init" in the future.[0m
+
+[0m[1m[32mTerraform has been successfully initialized![0m[32m[0m
+[3] Validate syntax and schema
+[31m╷[0m[0m
+[31m│[0m [0m[1m[31mError: [0m[0m[1mFailed to load plugin schemas[0m
+[31m│[0m [0m
+[31m│[0m [0m[0mError while loading schemas for plugin components: Failed to obtain
+[31m│[0m [0mprovider schema: Could not load the schema for provider
+[31m│[0m [0mregistry.terraform.io/hashicorp/aws: failed to instantiate provider
+[31m│[0m [0m"registry.terraform.io/hashicorp/aws" to obtain schema: timeout while
+[31m│[0m [0mwaiting for plugin to start..
+[31m╵[0m[0m
+FAIL: PoC3
+----- poc3 graph edges -----
+  "aws_instance.app" [label="aws_instance.app"];
+  "aws_internet_gateway.main" [label="aws_internet_gateway.main"];
+  "aws_route_table.public" [label="aws_route_table.public"];
+  "aws_route_table_association.public" [label="aws_route_table_association.public"];
+  "aws_security_group.app" [label="aws_security_group.app"];
+  "aws_subnet.private" [label="aws_subnet.private"];
+  "aws_subnet.public" [label="aws_subnet.public"];
+  "aws_vpc.main" [label="aws_vpc.main"];
+  "aws_vpc_security_group_ingress_rule.http" [label="aws_vpc_security_group_ingress_rule.http"];
+  "aws_instance.app" -> "aws_security_group.app";
+  "aws_instance.app" -> "aws_subnet.private";
+  "aws_internet_gateway.main" -> "aws_vpc.main";
+  "aws_route_table.public" -> "aws_internet_gateway.main";
+  "aws_route_table_association.public" -> "aws_route_table.public";
+  "aws_route_table_association.public" -> "aws_subnet.public";
+  "aws_security_group.app" -> "aws_vpc.main";
+  "aws_subnet.private" -> "aws_vpc.main";
+  "aws_subnet.public" -> "aws_vpc.main";
+  "aws_vpc_security_group_ingress_rule.http" -> "aws_security_group.app";
+PASS: PoC3 has no state file
+===== git =====
+fatal: not a git repository (or any of the parent directories): .git
+repo=no exit=128
+FAILS=3

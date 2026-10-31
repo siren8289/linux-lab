@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: logger
+  namespace: study
+spec:
+  selector:
+    matchLabels:
+      app: logger
+  template:
+    metadata:
+      labels:
+        app: logger
+    spec:
+      tolerations:
+        - key: node-role.kubernetes.io/control-plane
+          operator: Exists
+          effect: NoSchedule
+      containers:
+        - name: nginx
+          image: nginx:1.27-alpine
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi

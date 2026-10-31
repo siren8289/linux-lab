@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - namespace.yaml
+  - configmap.yaml
+  - secret.yaml
+  - quota.yaml
+  - deployment.yaml
+  - service.yaml
+  - hello.yaml
+  - daemonset.yaml
+  - ingress.yaml
+  - pvc.yaml
+  - rbac.yaml
+  - hpa.yaml
+  - unschedulable.yaml

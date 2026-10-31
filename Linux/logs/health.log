@@ -1,0 +1,12 @@
+date: invalid argument 's' for -I
+=====  =====
+[UPTIME]
+23:00  up 3 days,  3:23, 8 users, load averages: 9.47 13.59 15.97
+[MEMORY]
+/Users/jeong-yelim/linux-lab/scripts/healthcheck.sh: line 11: free: command not found
+date: invalid argument 's' for -I
+=====  =====
+[UPTIME]
+23:05  up 3 days,  3:29, 9 users, load averages: 17.99 11.19 13.77
+[MEMORY]
+/Users/jeong-yelim/linux-lab/scripts/healthcheck.sh: line 11: free: command not found

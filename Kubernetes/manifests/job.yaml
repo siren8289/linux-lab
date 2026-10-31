@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: once
+  namespace: study
+spec:
+  backoffLimit: 1
+  template:
+    spec:
+      restartPolicy: Never
+      tolerations:
+        - key: node-role.kubernetes.io/control-plane
+          operator: Exists
+          effect: NoSchedule
+      containers:
+        - name: wget
+          image: nginx:1.27-alpine
+          imagePullPolicy: IfNotPresent
+          command: ["wget", "-qO-", "http://web.study.svc.cluster.local/"]
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi

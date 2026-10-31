@@ -1,0 +1,851 @@
+===== 2026-10-29T02:07:49+0900 =====
+===== tools =====
+Client Version: v1.37.1
+Kustomize Version: v5.8.1
+kind v0.33.0 go1.27.0 darwin/arm64
+/Users/jeong-yelim/linux-lab/Kubernetes/scripts/run-lab.sh: line 36: helm: command not found
+helm_exit=127
+previous_context=<unset>
+===== existing clusters, read only =====
+cloud-poc
+gitops-lab
+NAME                       STATUS   ROLES           AGE    VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                       KERNEL-VERSION             CONTAINER-RUNTIME
+gitops-lab-control-plane   Ready    control-plane   6d1h   v1.37.0   172.20.0.4    <none>        Debian GNU/Linux 13 (trixie)   6.12.76-linuxkit (arm64)   containerd://2.3.4
+gitops-lab-worker          Ready    <none>          6d1h   v1.37.0   172.20.0.3    <none>        Debian GNU/Linux 13 (trixie)   6.12.76-linuxkit (arm64)   containerd://2.3.4
+NAME                      STATUS   ROLES           AGE    VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                       KERNEL-VERSION             CONTAINER-RUNTIME
+cloud-poc-control-plane   Ready    control-plane   5d4h   v1.37.0   172.20.0.2    <none>        Debian GNU/Linux 13 (trixie)   6.12.76-linuxkit (arm64)   containerd://2.3.4
+===== tag local kind node =====
+sha256:a1ed56cfb0e7b93589bdf97c8cd566405a265939e3620fc4f5de89adff580ae5
+===== kind create k8s-lab =====
+Creating cluster "k8s-lab" ...
+ • Ensuring node image (kindest/node:v1.37.0) 🖼️  ...
+ ✓ Ensuring node image (kindest/node:v1.37.0) 🖼️
+ • Preparing nodes 📦   ...
+ ✗ Preparing nodes 📦 
+Deleted nodes: ["k8s-lab-control-plane"]
+ERROR: failed to create cluster: could not find a log line that matches "Reached target .*Multi-User System.*|detected cgroup v1"
+===== cleanup k8s-lab =====
+Deleting cluster "k8s-lab" ...
+===== clusters after cleanup =====
+cloud-poc
+gitops-lab
+===== host listeners left alone =====
+festive_joliot 
+cloud-poc-control-plane 127.0.0.1:58472->6443/tcp
+gitops-lab-worker 
+gitops-lab-control-plane 127.0.0.1:8080->80/tcp, 127.0.0.1:8443->443/tcp, 127.0.0.1:54600->6443/tcp
+cloud-ops-lab-api-1 127.0.0.1:8000->8000/tcp
+CLEANUP_DONE previous_exit=1
+===== 2026-10-29T02:17:58+0900 =====
+===== tools =====
+Client Version: v1.37.1
+Kustomize Version: v5.8.1
+kind v0.33.0 go1.27.0 darwin/arm64
+/Users/jeong-yelim/linux-lab/Kubernetes/scripts/run-lab.sh: line 36: helm: command not found
+helm_exit=127
+previous_context=kind-k8s-lab
+===== existing clusters, read only =====
+cloud-poc
+gitops-lab
+k8s-lab
+Unable to connect to the server: net/http: TLS handshake timeout
+Unable to connect to the server: net/http: TLS handshake timeout
+===== tag local kind node =====
+sha256:a1ed56cfb0e7b93589bdf97c8cd566405a265939e3620fc4f5de89adff580ae5
+removing unready k8s-lab before create
+Deleting cluster "k8s-lab" ...
+Deleted nodes: ["k8s-lab-control-plane"]
+===== kind create k8s-lab =====
+Creating cluster "k8s-lab" ...
+ • Ensuring node image (kindest/node:v1.37.0) 🖼️  ...
+ ✓ Ensuring node image (kindest/node:v1.37.0) 🖼️
+ • Preparing nodes 📦   ...
+ ✓ Preparing nodes 📦 
+ • Writing configuration 📜  ...
+ ✓ Writing configuration 📜
+ • Starting control-plane 🕹️  ...
+ ✓ Starting control-plane 🕹️
+ • Installing CNI 🔌  ...
+ ✓ Installing CNI 🔌
+ • Installing StorageClass 💾  ...
+ ✓ Installing StorageClass 💾
+Set kubectl context to "kind-k8s-lab"
+You can now use your cluster with:
+
+kubectl cluster-info --context kind-k8s-lab
+
+Have a nice day! 👋
+===== version and readiness =====
+Client Version: v1.37.1
+Kustomize Version: v5.8.1
+Server Version: v1.37.0
+Kubernetes control plane is running at https://127.0.0.1:51489
+CoreDNS is running at https://127.0.0.1:51489/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+NAME                    STATUS     ROLES           AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                       KERNEL-VERSION             CONTAINER-RUNTIME
+k8s-lab-control-plane   NotReady   control-plane   9s    v1.37.0   172.20.0.5    <none>        Debian GNU/Linux 13 (trixie)   6.12.76-linuxkit (arm64)   containerd://2.3.4
+NAME                                            READY   STATUS    RESTARTS   AGE   IP           NODE                    NOMINATED NODE   READINESS GATES
+etcd-k8s-lab-control-plane                      1/1     Running   0          10s   172.20.0.5   k8s-lab-control-plane   <none>           <none>
+kube-apiserver-k8s-lab-control-plane            0/1     Running   0          10s   172.20.0.5   k8s-lab-control-plane   <none>           <none>
+kube-controller-manager-k8s-lab-control-plane   0/1     Running   0          10s   172.20.0.5   k8s-lab-control-plane   <none>           <none>
+kube-scheduler-k8s-lab-control-plane            1/1     Running   0          10s   172.20.0.5   k8s-lab-control-plane   <none>           <none>
+NAME                    HOLDER                  AGE
+k8s-lab-control-plane   k8s-lab-control-plane   8s
+----- readyz -----
+[+]ping ok
+[+]log ok
+[+]etcd ok
+[+]etcd-readiness ok
+[+]informer-sync ok
+[+]poststarthook/start-apiserver-admission-initializer ok
+[+]poststarthook/generic-apiserver-start-informers ok
+[+]poststarthook/priority-and-fairness-config-consumer ok
+[+]poststarthook/priority-and-fairness-filter ok
+[+]poststarthook/storage-object-count-tracker-hook ok
+[+]poststarthook/start-apiextensions-informers ok
+[+]poststarthook/start-apiextensions-controllers ok
+[+]poststarthook/crd-informer-synced ok
+[+]poststarthook/start-system-namespaces-controller ok
+[+]poststarthook/peer-endpoint-reconciler-controller ok
+[+]poststarthook/start-cluster-authentication-info-controller ok
+[+]poststarthook/start-kube-apiserver-identity-lease-controller ok
+[+]poststarthook/start-kube-apiserver-identity-lease-garbage-collector ok
+[+]poststarthook/storage-readiness ok
+[+]poststarthook/start-legacy-token-tracking-controller ok
+[+]poststarthook/start-service-ip-repair-controllers ok
+[+]poststarthook/rbac/bootstrap-roles ok
+[+]poststarthook/scheduling/bootstrap-system-priority-classes ok
+[+]poststarthook/priority-and-fairness-config-producer ok
+[+]poststarthook/bootstrap-controller ok
+[+]poststarthook/start-kubernetes-service-cidr-controller ok
+[+]poststarthook/aggregator-reload-proxy-client-cert ok
+[+]poststarthook/start-kube-aggregator-informers ok
+[+]poststarthook/apiservice-status-local-available-controller ok
+[+]poststarthook/apiservice-status-remote-available-controller ok
+[+]poststarthook/apiservice-registration-controller ok
+[+]poststarthook/apiservice-discovery-controller ok
+[+]poststarthook/kube-apiserver-autoregistration ok
+[+]autoregister-completion ok
+[+]poststarthook/apiservice-openapi-controller ok
+[+]poststarthook/apiservice-openapiv3-controller ok
+[+]shutdown ok
+readyz check passed
+
+----- runtime -----
+k8s-lab-control-plane kubelet=v1.37.0 runtime=containerd://2.3.4 os=linux arch=arm64
+===== load local nginx =====
+Image: "nginx:1.27-alpine" with ID "sha256:65645c7bb6a0661892a8b03b89d0743208a18dd2f3f17a54ef4b76fb8e2f2a10" not yet present on node "k8s-lab-control-plane", loading...
+ERROR: failed to load image: command "docker exec --privileged -i k8s-lab-control-plane ctr --namespace=k8s.io images import --all-platforms --digests --snapshotter=overlayfs -" failed with error: exit status 1
+
+Command Output: ctr: content digest sha256:62223d644fa234c3a1cc785ee14242ec47a77364226f1c811d2f669f96dc2ac8: not found
+===== cleanup k8s-lab =====
+Deleting cluster "k8s-lab" ...
+Deleted nodes: ["k8s-lab-control-plane"]
+===== clusters after cleanup =====
+cloud-poc
+gitops-lab
+===== host listeners left alone =====
+festive_joliot 
+cloud-poc-control-plane 127.0.0.1:58472->6443/tcp
+gitops-lab-worker 
+gitops-lab-control-plane 127.0.0.1:8080->80/tcp, 127.0.0.1:8443->443/tcp, 127.0.0.1:54600->6443/tcp
+cloud-ops-lab-api-1 127.0.0.1:8000->8000/tcp
+CLEANUP_DONE previous_exit=1
+===== 2026-10-29T02:21:06+0900 =====
+===== tools =====
+Client Version: v1.37.1
+Kustomize Version: v5.8.1
+kind v0.33.0 go1.27.0 darwin/arm64
+/Users/jeong-yelim/linux-lab/Kubernetes/scripts/run-lab.sh: line 39: helm: command not found
+helm_exit=127
+previous_context=<unset>
+===== existing clusters, read only =====
+cloud-poc
+gitops-lab
+NAME                       STATUS   ROLES           AGE    VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                       KERNEL-VERSION             CONTAINER-RUNTIME
+gitops-lab-control-plane   Ready    control-plane   6d1h   v1.37.0   172.20.0.4    <none>        Debian GNU/Linux 13 (trixie)   6.12.76-linuxkit (arm64)   containerd://2.3.4
+gitops-lab-worker          Ready    <none>          6d1h   v1.37.0   172.20.0.3    <none>        Debian GNU/Linux 13 (trixie)   6.12.76-linuxkit (arm64)   containerd://2.3.4
+NAME                      STATUS   ROLES           AGE    VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                       KERNEL-VERSION             CONTAINER-RUNTIME
+cloud-poc-control-plane   Ready    control-plane   5d4h   v1.37.0   172.20.0.2    <none>        Debian GNU/Linux 13 (trixie)   6.12.76-linuxkit (arm64)   containerd://2.3.4
+===== tag local kind node =====
+sha256:a1ed56cfb0e7b93589bdf97c8cd566405a265939e3620fc4f5de89adff580ae5
+===== kind create k8s-lab =====
+Creating cluster "k8s-lab" ...
+ • Ensuring node image (kindest/node:v1.37.0) 🖼️  ...
+ ✓ Ensuring node image (kindest/node:v1.37.0) 🖼️
+ • Preparing nodes 📦   ...
+ ✓ Preparing nodes 📦 
+ • Writing configuration 📜  ...
+ ✓ Writing configuration 📜
+ • Starting control-plane 🕹️  ...
+ ✓ Starting control-plane 🕹️
+ • Installing CNI 🔌  ...
+ ✓ Installing CNI 🔌
+ • Installing StorageClass 💾  ...
+ ✓ Installing StorageClass 💾
+Set kubectl context to "kind-k8s-lab"
+You can now use your cluster with:
+
+kubectl cluster-info --context kind-k8s-lab
+
+Have a nice day! 👋
+===== version and readiness =====
+Client Version: v1.37.1
+Kustomize Version: v5.8.1
+Server Version: v1.37.0
+Kubernetes control plane is running at https://127.0.0.1:51657
+CoreDNS is running at https://127.0.0.1:51657/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+NAME                    STATUS     ROLES           AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                       KERNEL-VERSION             CONTAINER-RUNTIME
+k8s-lab-control-plane   NotReady   control-plane   6s    v1.37.0   172.20.0.5    <none>        Debian GNU/Linux 13 (trixie)   6.12.76-linuxkit (arm64)   containerd://2.3.4
+NAME                                            READY   STATUS    RESTARTS   AGE   IP           NODE                    NOMINATED NODE   READINESS GATES
+etcd-k8s-lab-control-plane                      1/1     Running   0          7s    172.20.0.5   k8s-lab-control-plane   <none>           <none>
+kube-apiserver-k8s-lab-control-plane            1/1     Running   0          7s    172.20.0.5   k8s-lab-control-plane   <none>           <none>
+kube-controller-manager-k8s-lab-control-plane   0/1     Running   0          7s    172.20.0.5   k8s-lab-control-plane   <none>           <none>
+kube-scheduler-k8s-lab-control-plane            0/1     Running   0          7s    172.20.0.5   k8s-lab-control-plane   <none>           <none>
+NAME                    HOLDER                  AGE
+k8s-lab-control-plane   k8s-lab-control-plane   5s
+----- readyz -----
+[+]ping ok
+[+]log ok
+[+]etcd ok
+[+]etcd-readiness ok
+[+]informer-sync ok
+[+]poststarthook/start-apiserver-admission-initializer ok
+[+]poststarthook/generic-apiserver-start-informers ok
+[+]poststarthook/priority-and-fairness-config-consumer ok
+[+]poststarthook/priority-and-fairness-filter ok
+[+]poststarthook/storage-object-count-tracker-hook ok
+[+]poststarthook/start-apiextensions-informers ok
+[+]poststarthook/start-apiextensions-controllers ok
+[+]poststarthook/crd-informer-synced ok
+[+]poststarthook/start-system-namespaces-controller ok
+[+]poststarthook/peer-endpoint-reconciler-controller ok
+[+]poststarthook/start-cluster-authentication-info-controller ok
+[+]poststarthook/start-kube-apiserver-identity-lease-controller ok
+[+]poststarthook/start-kube-apiserver-identity-lease-garbage-collector ok
+[+]poststarthook/storage-readiness ok
+[+]poststarthook/start-legacy-token-tracking-controller ok
+[+]poststarthook/start-service-ip-repair-controllers ok
+[+]poststarthook/rbac/bootstrap-roles ok
+[+]poststarthook/scheduling/bootstrap-system-priority-classes ok
+[+]poststarthook/priority-and-fairness-config-producer ok
+[+]poststarthook/bootstrap-controller ok
+[+]poststarthook/start-kubernetes-service-cidr-controller ok
+[+]poststarthook/aggregator-reload-proxy-client-cert ok
+[+]poststarthook/start-kube-aggregator-informers ok
+[+]poststarthook/apiservice-status-local-available-controller ok
+[+]poststarthook/apiservice-status-remote-available-controller ok
+[+]poststarthook/apiservice-registration-controller ok
+[+]poststarthook/apiservice-discovery-controller ok
+[+]poststarthook/kube-apiserver-autoregistration ok
+[+]autoregister-completion ok
+[+]poststarthook/apiservice-openapi-controller ok
+[+]poststarthook/apiservice-openapiv3-controller ok
+[+]shutdown ok
+readyz check passed
+
+----- runtime -----
+k8s-lab-control-plane kubelet=v1.37.0 runtime=containerd://2.3.4 os=linux arch=arm64
+===== wait for node =====
+node/k8s-lab-control-plane condition met
+nginx image is pulled by the node. kind load of this multi-arch image failed with a missing content digest, so it is not used.
+===== apply study stack =====
+namespace/study created
+resourcequota/study created
+serviceaccount/reader created
+role.rbac.authorization.k8s.io/pod-reader created
+rolebinding.rbac.authorization.k8s.io/reader created
+configmap/web-config created
+secret/web-secret created
+service/web created
+persistentvolumeclaim/data created
+deployment.apps/web created
+daemonset.apps/logger created
+horizontalpodautoscaler.autoscaling/web created
+ingress.networking.k8s.io/web created
+pod/unschedulable created
+Error from server (Forbidden): error when creating "/Users/jeong-yelim/linux-lab/Kubernetes/manifests": pods "hello" is forbidden: failed quota: study: must specify requests.cpu for: nginx; requests.memory for: nginx
+===== cleanup k8s-lab =====
+Deleting cluster "k8s-lab" ...
+Deleted nodes: ["k8s-lab-control-plane"]
+===== clusters after cleanup =====
+cloud-poc
+gitops-lab
+===== existing clusters after lab =====
+gitops-lab-control-plane   Ready   control-plane   6d1h   v1.37.0
+gitops-lab-worker          Ready   <none>          6d1h   v1.37.0
+cloud-poc-control-plane   Ready   control-plane   5d4h   v1.37.0
+===== host listeners left alone =====
+festive_joliot 
+cloud-poc-control-plane 127.0.0.1:58472->6443/tcp
+gitops-lab-worker 
+gitops-lab-control-plane 127.0.0.1:8080->80/tcp, 127.0.0.1:8443->443/tcp, 127.0.0.1:54600->6443/tcp
+cloud-ops-lab-api-1 127.0.0.1:8000->8000/tcp
+CLEANUP_DONE previous_exit=1
+===== 2026-10-29T02:22:19+0900 =====
+===== tools =====
+Client Version: v1.37.1
+Kustomize Version: v5.8.1
+kind v0.33.0 go1.27.0 darwin/arm64
+/Users/jeong-yelim/linux-lab/Kubernetes/scripts/run-lab.sh: line 39: helm: command not found
+helm_exit=127
+previous_context=<unset>
+===== existing clusters, read only =====
+cloud-poc
+gitops-lab
+NAME                       STATUS   ROLES           AGE    VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                       KERNEL-VERSION             CONTAINER-RUNTIME
+gitops-lab-control-plane   Ready    control-plane   6d1h   v1.37.0   172.20.0.4    <none>        Debian GNU/Linux 13 (trixie)   6.12.76-linuxkit (arm64)   containerd://2.3.4
+gitops-lab-worker          Ready    <none>          6d1h   v1.37.0   172.20.0.3    <none>        Debian GNU/Linux 13 (trixie)   6.12.76-linuxkit (arm64)   containerd://2.3.4
+NAME                      STATUS   ROLES           AGE    VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                       KERNEL-VERSION             CONTAINER-RUNTIME
+cloud-poc-control-plane   Ready    control-plane   5d4h   v1.37.0   172.20.0.2    <none>        Debian GNU/Linux 13 (trixie)   6.12.76-linuxkit (arm64)   containerd://2.3.4
+===== tag local kind node =====
+sha256:a1ed56cfb0e7b93589bdf97c8cd566405a265939e3620fc4f5de89adff580ae5
+===== kind create k8s-lab =====
+Creating cluster "k8s-lab" ...
+ • Ensuring node image (kindest/node:v1.37.0) 🖼️  ...
+ ✓ Ensuring node image (kindest/node:v1.37.0) 🖼️
+ • Preparing nodes 📦   ...
+ ✓ Preparing nodes 📦 
+ • Writing configuration 📜  ...
+ ✓ Writing configuration 📜
+ • Starting control-plane 🕹️  ...
+ ✓ Starting control-plane 🕹️
+ • Installing CNI 🔌  ...
+ ✓ Installing CNI 🔌
+ • Installing StorageClass 💾  ...
+ ✓ Installing StorageClass 💾
+Set kubectl context to "kind-k8s-lab"
+You can now use your cluster with:
+
+kubectl cluster-info --context kind-k8s-lab
+
+Not sure what to do next? 😅  Check out https://kind.sigs.k8s.io/docs/user/quick-start/
+===== version and readiness =====
+Client Version: v1.37.1
+Kustomize Version: v5.8.1
+Server Version: v1.37.0
+Kubernetes control plane is running at https://127.0.0.1:51773
+CoreDNS is running at https://127.0.0.1:51773/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+NAME                    STATUS     ROLES           AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                       KERNEL-VERSION             CONTAINER-RUNTIME
+k8s-lab-control-plane   NotReady   control-plane   6s    v1.37.0   172.20.0.5    <none>        Debian GNU/Linux 13 (trixie)   6.12.76-linuxkit (arm64)   containerd://2.3.4
+NAME                                            READY   STATUS    RESTARTS   AGE   IP           NODE                    NOMINATED NODE   READINESS GATES
+etcd-k8s-lab-control-plane                      1/1     Running   0          5s    172.20.0.5   k8s-lab-control-plane   <none>           <none>
+kube-apiserver-k8s-lab-control-plane            0/1     Running   0          5s    172.20.0.5   k8s-lab-control-plane   <none>           <none>
+kube-controller-manager-k8s-lab-control-plane   0/1     Running   0          5s    172.20.0.5   k8s-lab-control-plane   <none>           <none>
+kube-scheduler-k8s-lab-control-plane            0/1     Running   0          5s    172.20.0.5   k8s-lab-control-plane   <none>           <none>
+NAME                    HOLDER                  AGE
+k8s-lab-control-plane   k8s-lab-control-plane   5s
+----- readyz -----
+[+]ping ok
+[+]log ok
+[+]etcd ok
+[+]etcd-readiness ok
+[+]informer-sync ok
+[+]poststarthook/start-apiserver-admission-initializer ok
+[+]poststarthook/generic-apiserver-start-informers ok
+[+]poststarthook/priority-and-fairness-config-consumer ok
+[+]poststarthook/priority-and-fairness-filter ok
+[+]poststarthook/storage-object-count-tracker-hook ok
+[+]poststarthook/start-apiextensions-informers ok
+[+]poststarthook/start-apiextensions-controllers ok
+[+]poststarthook/crd-informer-synced ok
+[+]poststarthook/start-system-namespaces-controller ok
+[+]poststarthook/peer-endpoint-reconciler-controller ok
+[+]poststarthook/start-cluster-authentication-info-controller ok
+[+]poststarthook/start-kube-apiserver-identity-lease-controller ok
+[+]poststarthook/start-kube-apiserver-identity-lease-garbage-collector ok
+[+]poststarthook/storage-readiness ok
+[+]poststarthook/start-legacy-token-tracking-controller ok
+[+]poststarthook/start-service-ip-repair-controllers ok
+[+]poststarthook/rbac/bootstrap-roles ok
+[+]poststarthook/scheduling/bootstrap-system-priority-classes ok
+[+]poststarthook/priority-and-fairness-config-producer ok
+[+]poststarthook/bootstrap-controller ok
+[+]poststarthook/start-kubernetes-service-cidr-controller ok
+[+]poststarthook/aggregator-reload-proxy-client-cert ok
+[+]poststarthook/start-kube-aggregator-informers ok
+[+]poststarthook/apiservice-status-local-available-controller ok
+[+]poststarthook/apiservice-status-remote-available-controller ok
+[+]poststarthook/apiservice-registration-controller ok
+[+]poststarthook/apiservice-discovery-controller ok
+[+]poststarthook/kube-apiserver-autoregistration ok
+[+]autoregister-completion ok
+[+]poststarthook/apiservice-openapi-controller ok
+[+]poststarthook/apiservice-openapiv3-controller ok
+[+]shutdown ok
+readyz check passed
+
+----- runtime -----
+k8s-lab-control-plane kubelet=v1.37.0 runtime=containerd://2.3.4 os=linux arch=arm64
+===== wait for node =====
+node/k8s-lab-control-plane condition met
+nginx image is pulled by the node. kind load of this multi-arch image failed with a missing content digest, so it is not used.
+===== apply study stack =====
+namespace/study created
+resourcequota/study created
+serviceaccount/reader created
+role.rbac.authorization.k8s.io/pod-reader created
+rolebinding.rbac.authorization.k8s.io/reader created
+configmap/web-config created
+secret/web-secret created
+service/web created
+persistentvolumeclaim/data created
+deployment.apps/web created
+daemonset.apps/logger created
+horizontalpodautoscaler.autoscaling/web created
+ingress.networking.k8s.io/web created
+pod/hello created
+pod/unschedulable created
+Waiting for deployment "web" rollout to finish: 0 of 2 updated replicas are available...
+Waiting for deployment "web" rollout to finish: 1 of 2 updated replicas are available...
+deployment "web" successfully rolled out
+daemon set "logger" successfully rolled out
+pod/hello condition met
+===== objects =====
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                  READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/web   2/2     2            2           13s
+
+NAME                            DESIRED   CURRENT   READY   AGE
+replicaset.apps/web-d7496596b   2         2         2       13s
+
+NAME                    DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+daemonset.apps/logger   1         1         1       1            1           <none>          13s
+
+NAME                      READY   STATUS    RESTARTS   AGE
+pod/hello                 1/1     Running   0          12s
+pod/logger-k5n4g          1/1     Running   0          13s
+pod/unschedulable         0/1     Pending   0          12s
+pod/web-d7496596b-4xhms   1/1     Running   0          13s
+pod/web-d7496596b-ngdng   1/1     Running   0          13s
+
+NAME          TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+service/web   ClusterIP   10.96.147.244   <none>        80/TCP    13s
+
+NAME            ENDPOINTS                     AGE
+endpoints/web   10.244.0.5:80,10.244.0.6:80   13s
+
+NAME                            CLASS    HOSTS             ADDRESS   PORTS   AGE
+ingress.networking.k8s.io/web   <none>   web.study.local             80      13s
+
+NAME                         DATA   AGE
+configmap/kube-root-ca.crt   1      13s
+configmap/web-config         1      13s
+
+NAME                TYPE     DATA   AGE
+secret/web-secret   Opaque   1      13s
+
+NAME                         STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+persistentvolumeclaim/data   Pending                                      standard       <unset>                 13s
+
+NAME                                      REFERENCE        TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/web   Deployment/web   cpu: <unknown>/50%   2         4         2          13s
+
+NAME                  REQUEST                                                          LIMIT   AGE
+resourcequota/study   pods: 5/10, requests.cpu: 130m/1, requests.memory: 112Mi/256Mi           13s
+
+NAME                     AGE
+serviceaccount/default   13s
+serviceaccount/reader    13s
+
+NAME                                        CREATED AT
+role.rbac.authorization.k8s.io/pod-reader   2026-10-28T17:23:22Z
+
+NAME                                           ROLE              AGE
+rolebinding.rbac.authorization.k8s.io/reader   Role/pod-reader   13s
+===== service read =====
+study-web
+
+study-token
+===== job =====
+job.batch/once created
+job.batch/once condition met
+study-web
+===== emptyDir disappears with the pod =====
+write_pod=web-d7496596b-4xhms
+scratch-note
+pod "web-d7496596b-4xhms" deleted from study namespace
+deployment "web" successfully rolled out
+----- pods after replacement -----
+NAME                  READY   STATUS    RESTARTS   AGE   IP            NODE                    NOMINATED NODE   READINESS GATES
+web-d7496596b-kkh8f   1/1     Running   0          1s    10.244.0.10   k8s-lab-control-plane   <none>           <none>
+web-d7496596b-ngdng   1/1     Running   0          18s   10.244.0.5    k8s-lab-control-plane   <none>           <none>
+read_pod=web-d7496596b-kkh8f
+cat: can't open '/scratch/note': No such file or directory
+command terminated with exit code 1
+EMPTYDIR_GONE exit=1
+study-web
+
+===== bare pod is not recreated =====
+pod "hello" deleted from study namespace
+Error from server (NotFound): pods "hello" not found
+HELLO_NOT_RECREATED exit=1
+===== quota =====
+Name:            study
+Namespace:       study
+Resource         Used  Hard
+--------         ----  ----
+pods             4     10
+requests.cpu     120m  1
+requests.memory  96Mi  256Mi
+===== rbac =====
+list_pods=yes
+list_secrets=no
+===== cleanup k8s-lab =====
+Deleting cluster "k8s-lab" ...
+Deleted nodes: ["k8s-lab-control-plane"]
+===== clusters after cleanup =====
+cloud-poc
+gitops-lab
+===== existing clusters after lab =====
+gitops-lab-control-plane   Ready   control-plane   6d1h   v1.37.0
+gitops-lab-worker          Ready   <none>          6d1h   v1.37.0
+cloud-poc-control-plane   Ready   control-plane   5d4h   v1.37.0
+===== host listeners left alone =====
+festive_joliot 
+cloud-poc-control-plane 127.0.0.1:58472->6443/tcp
+gitops-lab-worker 
+gitops-lab-control-plane 127.0.0.1:8080->80/tcp, 127.0.0.1:8443->443/tcp, 127.0.0.1:54600->6443/tcp
+cloud-ops-lab-api-1 127.0.0.1:8000->8000/tcp
+CLEANUP_DONE previous_exit=1
+===== 2026-10-29T02:24:10+0900 =====
+===== tools =====
+Client Version: v1.37.1
+Kustomize Version: v5.8.1
+kind v0.33.0 go1.27.0 darwin/arm64
+/Users/jeong-yelim/linux-lab/Kubernetes/scripts/run-lab.sh: line 39: helm: command not found
+helm_exit=127
+previous_context=<unset>
+===== existing clusters, read only =====
+cloud-poc
+gitops-lab
+NAME                       STATUS   ROLES           AGE    VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                       KERNEL-VERSION             CONTAINER-RUNTIME
+gitops-lab-control-plane   Ready    control-plane   6d1h   v1.37.0   172.20.0.4    <none>        Debian GNU/Linux 13 (trixie)   6.12.76-linuxkit (arm64)   containerd://2.3.4
+gitops-lab-worker          Ready    <none>          6d1h   v1.37.0   172.20.0.3    <none>        Debian GNU/Linux 13 (trixie)   6.12.76-linuxkit (arm64)   containerd://2.3.4
+NAME                      STATUS   ROLES           AGE    VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                       KERNEL-VERSION             CONTAINER-RUNTIME
+cloud-poc-control-plane   Ready    control-plane   5d4h   v1.37.0   172.20.0.2    <none>        Debian GNU/Linux 13 (trixie)   6.12.76-linuxkit (arm64)   containerd://2.3.4
+===== tag local kind node =====
+sha256:a1ed56cfb0e7b93589bdf97c8cd566405a265939e3620fc4f5de89adff580ae5
+===== kind create k8s-lab =====
+Creating cluster "k8s-lab" ...
+ • Ensuring node image (kindest/node:v1.37.0) 🖼️  ...
+ ✓ Ensuring node image (kindest/node:v1.37.0) 🖼️
+ • Preparing nodes 📦   ...
+ ✓ Preparing nodes 📦 
+ • Writing configuration 📜  ...
+ ✓ Writing configuration 📜
+ • Starting control-plane 🕹️  ...
+ ✓ Starting control-plane 🕹️
+ • Installing CNI 🔌  ...
+ ✓ Installing CNI 🔌
+ • Installing StorageClass 💾  ...
+ ✓ Installing StorageClass 💾
+Set kubectl context to "kind-k8s-lab"
+You can now use your cluster with:
+
+kubectl cluster-info --context kind-k8s-lab
+
+Thanks for using kind! 😊
+===== version and readiness =====
+Client Version: v1.37.1
+Kustomize Version: v5.8.1
+Server Version: v1.37.0
+Kubernetes control plane is running at https://127.0.0.1:51980
+CoreDNS is running at https://127.0.0.1:51980/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+NAME                    STATUS     ROLES           AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                       KERNEL-VERSION             CONTAINER-RUNTIME
+k8s-lab-control-plane   NotReady   control-plane   13s   v1.37.0   172.20.0.5    <none>        Debian GNU/Linux 13 (trixie)   6.12.76-linuxkit (arm64)   containerd://2.3.4
+NAME                                            READY   STATUS              RESTARTS   AGE   IP           NODE                    NOMINATED NODE   READINESS GATES
+coredns-559f6c778d-b74pj                        0/1     Pending             0          3s    <none>       <none>                  <none>           <none>
+coredns-559f6c778d-trhlg                        0/1     Pending             0          3s    <none>       <none>                  <none>           <none>
+etcd-k8s-lab-control-plane                      1/1     Running             0          10s   172.20.0.5   k8s-lab-control-plane   <none>           <none>
+kindnet-f6mbk                                   0/1     ContainerCreating   0          3s    172.20.0.5   k8s-lab-control-plane   <none>           <none>
+kube-apiserver-k8s-lab-control-plane            0/1     Running             0          10s   172.20.0.5   k8s-lab-control-plane   <none>           <none>
+kube-controller-manager-k8s-lab-control-plane   0/1     Running             0          10s   172.20.0.5   k8s-lab-control-plane   <none>           <none>
+kube-proxy-n7bh8                                0/1     ContainerCreating   0          3s    172.20.0.5   k8s-lab-control-plane   <none>           <none>
+kube-scheduler-k8s-lab-control-plane            0/1     Running             0          10s   172.20.0.5   k8s-lab-control-plane   <none>           <none>
+NAME                    HOLDER                  AGE
+k8s-lab-control-plane   k8s-lab-control-plane   10s
+----- readyz -----
+[+]ping ok
+[+]log ok
+[+]etcd ok
+[+]etcd-readiness ok
+[+]informer-sync ok
+[+]poststarthook/start-apiserver-admission-initializer ok
+[+]poststarthook/generic-apiserver-start-informers ok
+[+]poststarthook/priority-and-fairness-config-consumer ok
+[+]poststarthook/priority-and-fairness-filter ok
+[+]poststarthook/storage-object-count-tracker-hook ok
+[+]poststarthook/start-apiextensions-informers ok
+[+]poststarthook/start-apiextensions-controllers ok
+[+]poststarthook/crd-informer-synced ok
+[+]poststarthook/start-system-namespaces-controller ok
+[+]poststarthook/peer-endpoint-reconciler-controller ok
+[+]poststarthook/start-cluster-authentication-info-controller ok
+[+]poststarthook/start-kube-apiserver-identity-lease-controller ok
+[+]poststarthook/start-kube-apiserver-identity-lease-garbage-collector ok
+[+]poststarthook/storage-readiness ok
+[+]poststarthook/start-legacy-token-tracking-controller ok
+[+]poststarthook/start-service-ip-repair-controllers ok
+[+]poststarthook/rbac/bootstrap-roles ok
+[+]poststarthook/scheduling/bootstrap-system-priority-classes ok
+[+]poststarthook/priority-and-fairness-config-producer ok
+[+]poststarthook/bootstrap-controller ok
+[+]poststarthook/start-kubernetes-service-cidr-controller ok
+[+]poststarthook/aggregator-reload-proxy-client-cert ok
+[+]poststarthook/start-kube-aggregator-informers ok
+[+]poststarthook/apiservice-status-local-available-controller ok
+[+]poststarthook/apiservice-status-remote-available-controller ok
+[+]poststarthook/apiservice-registration-controller ok
+[+]poststarthook/apiservice-discovery-controller ok
+[+]poststarthook/kube-apiserver-autoregistration ok
+[+]autoregister-completion ok
+[+]poststarthook/apiservice-openapi-controller ok
+[+]poststarthook/apiservice-openapiv3-controller ok
+[+]shutdown ok
+readyz check passed
+
+----- runtime -----
+k8s-lab-control-plane kubelet=v1.37.0 runtime=containerd://2.3.4 os=linux arch=arm64
+===== wait for node =====
+node/k8s-lab-control-plane condition met
+nginx image is pulled by the node. kind load of this multi-arch image failed with a missing content digest, so it is not used.
+===== apply study stack =====
+namespace/study created
+resourcequota/study created
+serviceaccount/reader created
+role.rbac.authorization.k8s.io/pod-reader created
+rolebinding.rbac.authorization.k8s.io/reader created
+configmap/web-config created
+secret/web-secret created
+service/web created
+persistentvolumeclaim/data created
+deployment.apps/web created
+daemonset.apps/logger created
+horizontalpodautoscaler.autoscaling/web created
+ingress.networking.k8s.io/web created
+pod/hello created
+pod/unschedulable created
+Waiting for deployment "web" rollout to finish: 0 of 2 updated replicas are available...
+Waiting for deployment "web" rollout to finish: 1 of 2 updated replicas are available...
+deployment "web" successfully rolled out
+daemon set "logger" successfully rolled out
+pod/hello condition met
+===== objects =====
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                  READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/web   2/2     2            2           17s
+
+NAME                            DESIRED   CURRENT   READY   AGE
+replicaset.apps/web-d7496596b   2         2         2       16s
+
+NAME                    DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+daemonset.apps/logger   1         1         1       1            1           <none>          16s
+
+NAME                      READY   STATUS    RESTARTS   AGE
+pod/hello                 1/1     Running   0          16s
+pod/logger-p5mcg          1/1     Running   0          16s
+pod/unschedulable         0/1     Pending   0          16s
+pod/web-d7496596b-2jjp5   1/1     Running   0          16s
+pod/web-d7496596b-qrnh8   1/1     Running   0          16s
+
+NAME          TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
+service/web   ClusterIP   10.96.29.182   <none>        80/TCP    17s
+
+NAME            ENDPOINTS                     AGE
+endpoints/web   10.244.0.5:80,10.244.0.6:80   17s
+
+NAME                            CLASS    HOSTS             ADDRESS   PORTS   AGE
+ingress.networking.k8s.io/web   <none>   web.study.local             80      16s
+
+NAME                         DATA   AGE
+configmap/kube-root-ca.crt   1      17s
+configmap/web-config         1      17s
+
+NAME                TYPE     DATA   AGE
+secret/web-secret   Opaque   1      17s
+
+NAME                         STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+persistentvolumeclaim/data   Pending                                      standard       <unset>                 17s
+
+NAME                                      REFERENCE        TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/web   Deployment/web   cpu: <unknown>/50%   2         4         2          16s
+
+NAME                  REQUEST                                                          LIMIT   AGE
+resourcequota/study   pods: 5/10, requests.cpu: 130m/1, requests.memory: 112Mi/256Mi           17s
+
+NAME                     AGE
+serviceaccount/default   17s
+serviceaccount/reader    17s
+
+NAME                                        CREATED AT
+role.rbac.authorization.k8s.io/pod-reader   2026-10-28T17:25:18Z
+
+NAME                                           ROLE              AGE
+rolebinding.rbac.authorization.k8s.io/reader   Role/pod-reader   17s
+===== service read =====
+study-web
+
+study-token
+===== job =====
+job.batch/once created
+job.batch/once condition met
+study-web
+===== emptyDir disappears with the pod =====
+write_pod=web-d7496596b-2jjp5
+scratch-note
+pod "web-d7496596b-2jjp5" deleted from study namespace
+Waiting for deployment "web" rollout to finish: 1 of 2 updated replicas are available...
+deployment "web" successfully rolled out
+----- pods after replacement -----
+NAME                  READY   STATUS    RESTARTS   AGE   IP            NODE                    NOMINATED NODE   READINESS GATES
+web-d7496596b-hhl79   1/1     Running   0          3s    10.244.0.10   k8s-lab-control-plane   <none>           <none>
+web-d7496596b-qrnh8   1/1     Running   0          30s   10.244.0.5    k8s-lab-control-plane   <none>           <none>
+read_pod=web-d7496596b-hhl79
+cat: can't open '/scratch/note': No such file or directory
+command terminated with exit code 1
+EMPTYDIR_GONE exit=1
+study-web
+
+===== bare pod is not recreated =====
+pod "hello" deleted from study namespace
+Error from server (NotFound): pods "hello" not found
+HELLO_NOT_RECREATED exit=1
+===== quota =====
+Name:            study
+Namespace:       study
+Resource         Used  Hard
+--------         ----  ----
+pods             4     10
+requests.cpu     120m  1
+requests.memory  96Mi  256Mi
+===== rbac =====
+list_pods=yes
+list_secrets=no
+===== hpa =====
+NAME   REFERENCE        TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+web    Deployment/web   cpu: <unknown>/50%   2         4         2          38s
+Name:                                                  web
+Namespace:                                             study
+Labels:                                                <none>
+Annotations:                                           <none>
+CreationTimestamp:                                     Thu, 29 Oct 2026 02:25:19 +0900
+Reference:                                             Deployment/web
+Metrics:                                               ( current / target )
+  resource cpu on pods  (as a percentage of request):  <unknown> / 50%
+Min replicas:                                          2
+Max replicas:                                          4
+Deployment pods:                                       2 current / 0 desired
+Conditions:
+  Type           Status  Reason                   Message
+  ----           ------  ------                   -------
+  AbleToScale    True    SucceededGetScale        the HPA controller was able to get the target's current scale
+  ScalingActive  False   FailedGetResourceMetric  the HPA was unable to compute the replica count: failed to get cpu utilization: unable to get metrics for resource cpu: unable to fetch metrics from resource metrics API: the server could not find the requested resource (get pods.metrics.k8s.io)
+Events:
+  Type     Reason                        Age               From                       Message
+  ----     ------                        ----              ----                       -------
+  Warning  FailedGetResourceMetric       8s (x3 over 38s)  horizontal-pod-autoscaler  failed to get cpu utilization: unable to get metrics for resource cpu: unable to fetch metrics from resource metrics API: the server could not find the requested resource (get pods.metrics.k8s.io)
+  Warning  FailedComputeMetricsReplicas  8s (x3 over 38s)  horizontal-pod-autoscaler  invalid metrics (1 invalid out of 1), first error is: failed to get cpu resource metric value: failed to get cpu utilization: unable to get metrics for resource cpu: unable to fetch metrics from resource metrics API: the server could not find the requested resource (get pods.metrics.k8s.io)
+===== scheduling =====
+Node-Selectors:              disk=nonexistent
+Tolerations:                 node-role.kubernetes.io/control-plane:NoSchedule op=Exists
+                             node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+Events:
+  Type     Reason            Age   From               Message
+  ----     ------            ----  ----               -------
+  Warning  FailedScheduling  38s   default-scheduler  0/1 nodes are available: 1 node(s) didn't match Pod's node affinity/selector. preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+===== pvc =====
+Status:        Pending
+Volume:        
+Labels:        <none>
+Annotations:   <none>
+Finalizers:    [kubernetes.io/pvc-protection]
+Capacity:      
+Access Modes:  
+VolumeMode:    Filesystem
+Used By:       <none>
+Events:
+  Type    Reason                Age               From                         Message
+  ----    ------                ----              ----                         -------
+  Normal  WaitForFirstConsumer  1s (x4 over 40s)  persistentvolume-controller  waiting for first consumer to be created before binding
+===== ingress =====
+Name:             web
+Labels:           <none>
+Namespace:        study
+Address:          
+Ingress Class:    <none>
+Default backend:  <default>
+Rules:
+  Host             Path  Backends
+  ----             ----  --------
+  web.study.local  
+                   /   web:80 (10.244.0.5:80,10.244.0.10:80)
+Annotations:       <none>
+Events:            <none>
+===== privileged pod rejected =====
+Error from server (Forbidden): error when creating "/Users/jeong-yelim/linux-lab/Kubernetes/manifests/privileged.yaml": pods "privileged" is forbidden: violates PodSecurity "baseline:latest": privileged (container "nginx" must not set securityContext.privileged=true)
+privileged_apply_exit=1
+===== crashloop =====
+deployment.apps/crash created
+NAME                    READY   STATUS             RESTARTS     AGE   IP            NODE                    NOMINATED NODE   READINESS GATES
+crash-88ccb8787-gwbcp   0/1     CrashLoopBackOff   1 (4s ago)   8s    10.244.0.11   k8s-lab-control-plane   <none>           <none>
+boom
+deployment.apps "crash" deleted from study namespace
+===== explain first lines =====
+GROUP:      apps
+KIND:       Deployment
+VERSION:    v1
+
+DESCRIPTION:
+    Deployment enables declarative updates for Pods and ReplicaSets.
+    
+FIELDS:
+  apiVersion	<string>
+    APIVersion defines the versioned schema of this representation of an object.
+    Servers should convert recognized schemas to the latest internal value, and
+    may reject unrecognized values. More info:
+    https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+
+  kind	<string>
+    Kind is a string value representing the REST resource this object
+    represents. Servers may infer this from the endpoint the client submits
+    requests to. Cannot be updated. In CamelCase. More info:
+    https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+
+GROUP:      autoscaling
+KIND:       HorizontalPodAutoscaler
+VERSION:    v2
+
+DESCRIPTION:
+    HorizontalPodAutoscaler is the configuration for a horizontal pod
+    autoscaler, which automatically manages the replica count of any resource
+    implementing the scale subresource based on the metrics specified.
+    
+FIELDS:
+  apiVersion	<string>
+    APIVersion defines the versioned schema of this representation of an object.
+LAB_COMMANDS_DONE
+===== cleanup k8s-lab =====
+Deleting cluster "k8s-lab" ...
+Deleted nodes: ["k8s-lab-control-plane"]
+===== clusters after cleanup =====
+cloud-poc
+gitops-lab
+===== existing clusters after lab =====
+gitops-lab-control-plane   Ready   control-plane   6d1h   v1.37.0
+gitops-lab-worker          Ready   <none>          6d1h   v1.37.0
+cloud-poc-control-plane   Ready   control-plane   5d4h   v1.37.0
+===== host listeners left alone =====
+festive_joliot 
+cloud-poc-control-plane 127.0.0.1:58472->6443/tcp
+gitops-lab-worker 
+gitops-lab-control-plane 127.0.0.1:8080->80/tcp, 127.0.0.1:8443->443/tcp, 127.0.0.1:54600->6443/tcp
+cloud-ops-lab-api-1 127.0.0.1:8000->8000/tcp
+CLEANUP_DONE previous_exit=0
